@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'proteins',
 ]
 
 MIDDLEWARE = [
@@ -76,9 +77,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    "existing_proteins": {
+        "NAME": "proteins_tutorial",
+        "ENGINE": "django.db.backends.mysql",
+        "HOST": "localhost",
+        "USER": "root",
+        "PASSWORD": "",
+    },
 }
 
+DATABASE_ROUTERS = [
+    'proteins.db_router.LegacyRouter',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
