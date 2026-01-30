@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Search Proteins{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Search</h2>
+
+<form method="get" action="/proteins/show">
+    <div class="input-group">
+        <input
+            id="search-input"
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+        >
+    <ul
+    id="autocomplete-results"
+    class="list-group position-absolute w-100 d-none overflow-auto"
+    style="max-height: 250px; z-index: 1000;"
+    ></ul>
+        <button class="btn btn-primary" type="submit">
+            Search
+        </button>
+    </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const input = document.getElementById("search-input");
+const results = document.getElementById("autocomplete-results");
+
+let controller = null;
+console.log("search.js loaded");
+console.log(input)
+input.addEventListener("input", async () => {
+    console.log("typing....")
+    const query = input.value.trim();
+
+    // Clear if empty
+    if (!query) {
+        results.classList.add("d-none");
+        results.innerHTML = "";
+        return;
+    }
+
+    // Cancel previous request
+    if (controller) controller.abort();
+    controller = new AbortController();
+
+    try {
+        const response = await fetch(`/proteins/search?q=${encodeURIComponent(query)}`, {
+            signal: controller.signal
+        });
+
+        const items_all = await response.json();
+        console.log(items_all);
+        const items = items_all["uniprot_ids"];
+        console.log(items);
+        results.innerHTML = "";
+
+        if (!items.length) {
+            results.classList.add("d-none");
+            return;
+        }
+
+        items.forEach(item => {
+            const li = document.createElement("li");
+            li.className = "list-group-item list-group-item-action";
+            li.textContent = item;
+
+            li.addEventListener("click", () => {
+                input.value = item;
+                results.classList.add("d-none");
+            });
+
+            results.appendChild(li);
+        });
+
+        results.classList.remove("d-none");
+
+    } catch (err) {
+        if (err.name !== "AbortError") {
+            console.error(err);
+        }
+    }
+});
+</script>
+
+{% endblock %}
