@@ -5,10 +5,12 @@
 {% block content %}
 <h2 class="mb-4">Search</h2>
 
-<form method="get" id="prot-search-form" onsubmit="showProt()">
+<form method="get" id="prot-search-form" action="{% url 'show_protein_param' %}">
+    {% csrf_token %}
     <div class="input-group">
         <input
             id="search-input"
+            name="pid"
             type="text"
             class="form-control"
             placeholder="Search..."
@@ -51,7 +53,7 @@ input.addEventListener("input", async () => {
     controller = new AbortController();
 
     try {
-        const response = await fetch(`/proteins/search?q=${encodeURIComponent(query)}`, {
+        const response = await fetch(`{% url 'search' %}?q=${query}`, {
             signal: controller.signal
         });
 
@@ -88,11 +90,6 @@ input.addEventListener("input", async () => {
     }
 });
 
-function showProt(){
-    var action_src = "/proteins/show/" + document.getElementById("search-input").value;
-    var prot_form = document.getElementById('prot-search-form');
-    prot_form.action = action_src ;
-}
 </script>
 
 {% endblock %}

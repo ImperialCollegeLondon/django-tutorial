@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.core import serializers
@@ -19,6 +19,14 @@ def prot_autocomplete(request):
     uniprot_ids = [p.uniprot_id for p in proteins]
     print(uniprot_ids)
     return JsonResponse({"uniprot_ids": uniprot_ids})
+
+
+def prot_show_param(request):
+    pid = request.GET.get("pid").upper()
+    print(pid)
+    if len(pid)>0:
+        return redirect('show_protein', pid=pid)
+    return render(request, "proteins/index.html", context={})
 
 def prot_show(request, pid):
     print(pid)
