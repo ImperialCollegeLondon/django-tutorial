@@ -5,12 +5,11 @@
 {% block content %}
 <h2 class="mb-4">Search</h2>
 
-<form method="get" action="/proteins/show">
+<form method="get" id="prot-search-form" onsubmit="showProt()">
     <div class="input-group">
         <input
             id="search-input"
             type="text"
-            name="q"
             class="form-control"
             placeholder="Search..."
             aria-label="Search"
@@ -88,6 +87,12 @@ input.addEventListener("input", async () => {
         }
     }
 });
+
+function showProt(){
+    var action_src = "/proteins/show/" + document.getElementById("search-input").value;
+    var prot_form = document.getElementById('prot-search-form');
+    prot_form.action = action_src ;
+}
 </script>
 
 {% endblock %}

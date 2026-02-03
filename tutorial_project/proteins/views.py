@@ -20,9 +20,8 @@ def prot_autocomplete(request):
     print(uniprot_ids)
     return JsonResponse({"uniprot_ids": uniprot_ids})
 
-def prot_show(request):
-    q = request.GET.get("q").upper()
-    print(q)
-    protein = Protein.objects.filter(uniprot_id=q).first()
+def prot_show(request, pid):
+    print(pid)
+    protein = Protein.objects.filter(uniprot_id=pid).first()
     print(protein)
     return render(request, "proteins/show_table.html", context = {"protein": protein})
