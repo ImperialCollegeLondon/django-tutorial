@@ -10,6 +10,11 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pdbe-molstar@3.3.0/build/pdbe-molstar.css" />
+    <!-- For Light Theme include this CSS file instead of the above -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pdbe-molstar@3.3.0/build/pdbe-molstar-light.css" /> -->
+
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -23,17 +28,11 @@
     <!-- Main Content -->
     <main class="flex-grow-1 d-flex align-items-center">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            {% block content %}
-                            <!-- Child templates fill this -->
-                            {% endblock %}
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+                {% block content %}
+                <!-- Child templates fill this -->
+                {% endblock %}
+
         </div>
     </main>
 
@@ -48,6 +47,9 @@
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
     </script>
+    <!-- JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pdbe-molstar@3.3.0/build/pdbe-molstar-plugin.js"></script>
+
     {% block scripts %}
     <!-- Page-specific scripts go here -->
     {% endblock %}

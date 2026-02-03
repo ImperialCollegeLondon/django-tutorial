@@ -1,0 +1,18 @@
+
+<script>
+    // Create plugin instance
+    const viewerInstance = new PDBeMolstarPlugin();
+    const pdb_id =  "{{ structure_segments.0.pdb_id }}";
+    console.log(pdb_id);
+    // Set options (All the available options are listed below in the documentation)
+    const options = {
+        moleculeId: pdb_id,
+        hideControls: 'true'
+    };
+    
+    // Get element from HTML/Template to place the viewer 
+    const viewerContainer = document.getElementById('myViewer');
+
+    // Call render method to display the 3D view
+    viewerInstance.render(viewerContainer, options);
+</script>

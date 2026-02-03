@@ -1,0 +1,28 @@
+
+{% if structure_segments %}
+<div class="row justify-content-center h-100">
+<div class="col-md-4">
+<h5 class="card-title"> {{ structure_segments|length }} structures found.</h5>
+<h5 class="card-title">Showing structure: {{ structure_segments.0.pdb_id }}</h5>
+</div>
+</div>
+
+<div class="row justify-content-center h-100">
+<div class="col-md-4">
+<div class="card">
+  <div class="card-body">
+    <p class="card-text">
+      <div id="myViewer" style="height: 200px;">
+      </div>
+    </p>
+  </div>
+</div>
+</div>
+</div>
+{% else %}
+<div class="row justify-content-center h-100">
+<div class="col-md-4">
+<h5 class="card-title">No structures found!</h5>
+</div>
+</div>
+{% endif %}

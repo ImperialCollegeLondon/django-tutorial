@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %} Protein {% endblock %}
+
+{% block content %}
+
+    {% include "proteins/show_table.html" %}
+
+    {% include "proteins/show_structure.html" %}
+
+{% endblock %}
+
+{% block scripts %}
+
+    {% include "proteins/show_structure_script.html" %}
+
+{% endblock %}
