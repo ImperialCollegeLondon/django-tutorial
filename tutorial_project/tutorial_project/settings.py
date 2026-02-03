@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import pymysql
+pymysql.version_info = (1, 4, 6, 'final', 0)
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,11 +82,11 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     },
     "existing_proteins": {
-        "NAME": "proteins_tutorial",
+        "NAME": "protein_tutorial",
         "ENGINE": "django.db.backends.mysql",
-        "HOST": "localhost",
-        "USER": "root",
-        "PASSWORD": "",
+        "HOST": "msc.bc.ic.ac.uk",
+        "USER": "anja",
+        "PASSWORD": "anja",
     },
 }
 
